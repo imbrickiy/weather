@@ -18,6 +18,7 @@ import { kelvinToCelsius } from "@/utils/kelvinToCelsius";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import { Animated } from "react-native";
 import { useEffect, useRef } from "react";
+
 const KEY = "672d3a04afaebefd5f2060053085fd65";
 const URI =
   "https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={API_KEY}";
@@ -26,7 +27,8 @@ const URI_IZMIR =
   "https://api.openweathermap.org/data/2.5/weather?lat=38.4224548&lon=27.1310699&appid=672d3a04afaebefd5f2060053085fd65&units=metric";
 
 export default function Home() {
-  const { data, loading, error } = useFetch(URI_IZMIR);
+  const data = require("../../assets/data.json");
+  // const { data, loading, error } = useFetch(URI_IZMIR);
   const fadeAnim = useRef(new Animated.Value(0)).current; // Начальное значение для анимации
 
   useEffect(() => {
@@ -37,8 +39,8 @@ export default function Home() {
     }).start();
   }, [fadeAnim]);
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error: {error}</Text>;
+  // if (loading) return <Text>Loading...</Text>;
+  // if (error) return <Text>Error: {error}</Text>;
 
   const currentDate = getCurrentDate();
 

@@ -1,59 +1,49 @@
-import * as S from "@effect/schema/Schema";
-
-
-export class Wind extends S.Class<Wind>("Wind")({
-  "deg": S.Number,
-  "speed": S.Number,
-}) {}
-
-export class Weather extends S.Class<Weather>("Weather")({
-  "description": S.String,
-  "icon": S.String,
-  "id": S.Number,
-  "main": S.String,
-}) {}
-
-export class Sys extends S.Class<Sys>("Sys")({
-  "country": S.String,
-  "id": S.Number,
-  "sunrise": S.Number,
-  "sunset": S.Number,
-  "type": S.Number,
-}) {}
-
-export class Main extends S.Class<Main>("Main")({
-  "feels_like": S.Number,
-  "grnd_level": S.Number,
-  "humidity": S.Number,
-  "pressure": S.Number,
-  "sea_level": S.Number,
-  "temp": S.Number,
-  "temp_max": S.Number,
-  "temp_min": S.Number,
-}) {}
-
-export class Coord extends S.Class<Coord>("Coord")({
-  "lat": S.Number,
-  "lon": S.Number,
-}) {}
-
-export class Clouds extends S.Class<Clouds>("Clouds")({
-  "all": S.Number,
-}) {}
-
-export class Data extends S.Class<Data>("Data")({
-  "base": S.String,
-  "clouds": Clouds,
-  "cod": S.Number,
-  "coord": Coord,
-  "dt": S.Number,
-  "id": S.Number,
-  "main": Main,
-  "name": S.String,
-  "sys": Sys,
-  "timezone": S.Number,
-  "visibility": S.Number,
-  "weather": S.Array(Weather),
-  "wind": Wind,
-}) {}
-
+{
+  "coord": {
+    "lon": 7.367,
+    "lat": 45.133
+  },
+  "weather": [
+    {
+      "id": 501,
+      "main": "Rain",
+      "description": "moderate rain",
+      "icon": "10d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 284.2,
+    "feels_like": 282.93,
+    "temp_min": 283.06,
+    "temp_max": 286.82,
+    "pressure": 1021,
+    "humidity": 60,
+    "sea_level": 1021,
+    "grnd_level": 910
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 4.09,
+    "deg": 121,
+    "gust": 3.47
+  },
+  "rain": {
+    "1h": 2.73
+  },
+  "clouds": {
+    "all": 83
+  },
+  "dt": 1726660758,
+  "sys": {
+    "type": 1,
+    "id": 6736,
+    "country": "IT",
+    "sunrise": 1726636384,
+    "sunset": 1726680975
+  },
+  "timezone": 7200,
+  "id": 3165523,
+  "name": "Province of Turin",
+  "cod": 200
+}
