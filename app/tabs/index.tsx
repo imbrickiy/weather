@@ -18,6 +18,7 @@ import { kelvinToCelsius } from "@/utils/kelvinToCelsius";
 import { getCurrentDate } from "@/utils/getCurrentDate";
 import { Animated } from "react-native";
 import { useEffect, useRef } from "react";
+import Header from "@/components/Header";
 
 const KEY = "672d3a04afaebefd5f2060053085fd65";
 const URI =
@@ -49,27 +50,7 @@ export default function Home() {
       {data && (
         <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
           <Center className="flex-1 mx-auto">
-            <HStack className="justify-between w-full px-2 h-[26px]">
-              <Box>
-                <CustomLabel
-                  data={data.name}
-                  otherStyle="text-[26px] text-white"
-                />
-                <CustomLabel data="Current Location" />
-              </Box>
-              <HStack className="gap-5">
-                <CustomButton
-                  link="/tabs/location"
-                  title="Home"
-                  icon="map-outline"
-                />
-                <CustomButton
-                  link="/tabs/settings"
-                  title="Settings"
-                  icon="settings-outline"
-                />
-              </HStack>
-            </HStack>
+            <Header data={data.name} />
             <VStack className="items-center h-[80vh] justify-between space-y-4 pt-14">
               <CustomLabel data="in sync" />
               <CustomLabel data={currentDate} />
