@@ -50,7 +50,7 @@ export default function Home() {
       {data && (
         <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
           <Center className="flex-1 mx-auto">
-            <Header data={data.name} />
+            <Header data={data.name} url="/tabs/details" />
             <VStack className="items-center h-[80vh] justify-between space-y-4 pt-14">
               <CustomLabel data="in sync" />
               <CustomLabel data={currentDate} />
