@@ -9,8 +9,8 @@ import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { Link } from "expo-router";
-import { SafeAreaView, Image } from "react-native";
+import { Link, router } from "expo-router";
+import { SafeAreaView, Image, Pressable } from "react-native";
 import useFetch from "@/hooks/useFetch";
 import { Data } from "@/interface/data";
 import { formatUnixToUTC } from "@/utils/formatUnixToUTC";
@@ -27,7 +27,7 @@ const URI_ICON = "https://openweathermap.org/img/wn/";
 const URI_IZMIR =
   "https://api.openweathermap.org/data/2.5/weather?lat=38.4224548&lon=27.1310699&appid=672d3a04afaebefd5f2060053085fd65&units=metric";
 
-export default function Home() {
+export default function HomeScreen({ navigation }: any) {
   const data = require("../../assets/data.json");
   // const { data, loading, error } = useFetch(URI_IZMIR);
   const fadeAnim = useRef(new Animated.Value(0)).current; // Начальное значение для анимации
@@ -39,21 +39,30 @@ export default function Home() {
       useNativeDriver: true,
     }).start();
   }, [fadeAnim]);
-
   // if (loading) return <Text>Loading...</Text>;
   // if (error) return <Text>Error: {error}</Text>;
 
   const currentDate = getCurrentDate();
+  const navigateToDetails = () => {
+    navigation.navigate("Details", data);
+  };
+  console.log(data.main.temp_min.toFixed(1));
 
   return (
     <SafeAreaView className="flex-1 bg-black">
       {data && (
         <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
           <Center className="flex-1 mx-auto">
-            <Header data={data.name} url="/tabs/details" />
+            <Header title={data.name} navigation={navigation} />
             <VStack className="items-center h-[80vh] justify-between space-y-4 pt-14">
-              <CustomLabel data="in sync" />
-              <CustomLabel data={currentDate} />
+              <Pressable onPress={navigateToDetails}>
+                <CustomLabel
+                  icon="cursor-default-click"
+                  size={30}
+                  color="#ffffff"
+                />
+              </Pressable>
+              <CustomLabel data={currentDate} className="text-2xl" />
 
               <Text className="font-normal text-white text-[110px] font-ubuntu">
                 {data.main.temp.toFixed(0)}°C

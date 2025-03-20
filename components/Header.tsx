@@ -9,28 +9,43 @@ import { router } from "expo-router";
 import { Link, LinkText } from "@/components/ui/link";
 import { Pressable } from "@/components/ui/pressable";
 import { LinkProps } from "expo-router";
+import { NavigationProp } from "@react-navigation/native";
 
 type Props = {
-  data: string;
-  url: any;
+  title: string;
+  handlerPress?: () => void;
   description?: string;
+  navigation: NavigationProp<any>;
 };
 
-export default function Header({ data, url, description }: Props) {
+export default function Header({
+  title,
+  handlerPress,
+  description,
+  navigation,
+}: Props) {
+  const handlerToLocation = () => {
+    navigation.navigate("Location", { screen: "Location" });
+  };
+  const handlerToSettings = () => {
+    navigation.navigate("Settings", { screen: "Settings" });
+  };
   return (
     <HStack className="justify-between w-full px-2 h-[26px]">
       <Box>
-        <Pressable onPress={() => router.push(url)} className="text-white">
-          <CustomLabel data={data} otherStyle="text-[26px] text-white" />
+        <Pressable onPress={handlerPress}>
+          <CustomLabel data={title} className="text-2xl text-white" />
         </Pressable>
-        <CustomLabel data={description || "Current Location"} />
+        <CustomLabel
+          data={description || "Current Location"}
+          className="text-2xl"
+        />
       </Box>
       <HStack className="gap-5">
-        <CustomButton link="/tabs/location" title="Home" icon="map-outline" />
+        <CustomButton icon="map-outline" clickHandler={handlerToLocation} />
         <CustomButton
-          link="/tabs/settings"
-          title="Settings"
           icon="settings-outline"
+          clickHandler={handlerToSettings}
         />
       </HStack>
     </HStack>

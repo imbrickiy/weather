@@ -1,3 +1,4 @@
+import "../gesture-handler.js";
 import React from "react";
 import Gradient from "@/assets/Icons/Gradient";
 import DocumentData from "@/assets/Icons/DocumentData";
@@ -5,10 +6,10 @@ import LightBulbPerson from "@/assets/Icons/LightbulbPerson";
 import Rocket from "@/assets/Icons/Rocket";
 import Logo from "@/assets/Icons/Logo";
 import { Box } from "@/components/ui/box";
-import { ScrollView } from "react-native";
+import { Pressable, ScrollView } from "react-native";
 import { Text } from "@/components/ui/text";
 
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { VStack } from "@/components/ui/vstack";
 
 const FeatureCard = ({ iconSvg: IconSvg, name, desc }: any) => {
@@ -35,11 +36,11 @@ export default function Home() {
     <Box className="flex-col bg-black h-[100vh] items-center justify-between">
       <Box className="flex w-full" />
       <Box className="">
-        <Link href="/tabs">
+        <Pressable onPress={() => router.push("/tabs" as any)}>
           <Text className=" text-center text-4xl font-ubuntu text-white">
             Weather
           </Text>
-        </Link>
+        </Pressable>
       </Box>
       <Box className="flex w-full pb-4">
         <Text className=" text-[#616161] text-center ">
