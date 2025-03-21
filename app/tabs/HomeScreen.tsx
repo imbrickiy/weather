@@ -19,14 +19,12 @@ import { getCurrentDate } from "@/utils/getCurrentDate";
 import { Animated } from "react-native";
 import { useEffect, useRef } from "react";
 import Header from "@/components/Header";
+import { Spinner } from "@/components/ui/spinner";
+import colors from "tailwindcss/colors";
+import { Alert, AlertText, AlertIcon } from "@/components/ui/alert";
+import { InfoIcon } from "@/components/ui/icon";
 
-const KEY = "672d3a04afaebefd5f2060053085fd65";
-const URI =
-  "https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={API_KEY}";
-const URI_ICON = "https://openweathermap.org/img/wn/";
-const URI_IZMIR =
-  "https://api.openweathermap.org/data/2.5/weather?lat=38.4224548&lon=27.1310699&appid=672d3a04afaebefd5f2060053085fd65&units=metric";
-
+const iconUrl = "https://openweathermap.org/img/wn/";
 export default function HomeScreen({ navigation }: any) {
   const data = require("../../assets/data.json");
   // const { data, loading, error } = useFetch(URI_IZMIR);
@@ -39,14 +37,18 @@ export default function HomeScreen({ navigation }: any) {
       useNativeDriver: true,
     }).start();
   }, [fadeAnim]);
-  // if (loading) return <Text>Loading...</Text>;
-  // if (error) return <Text>Error: {error}</Text>;
+  // if (loading) return <Spinner size="large" color={colors.gray[500]} />;
+  // if (error) return (
+  //   <Alert action="error" variant="outline">
+  //     <AlertIcon as={InfoIcon} />
+  //     <AlertText>{error}</AlertText>
+  //   </Alert>
+  // );
 
   const currentDate = getCurrentDate();
   const navigateToDetails = () => {
     navigation.navigate("Details", data);
   };
-  console.log(data.main.temp_min.toFixed(1));
 
   return (
     <SafeAreaView className="flex-1 bg-black">
@@ -89,7 +91,7 @@ export default function HomeScreen({ navigation }: any) {
               </HStack>
               <VStack className="items-center">
                 <Image
-                  source={{ uri: URI_ICON + data.weather[0].icon + "@4x.png" }}
+                  source={{ uri: iconUrl + data.weather[0].icon + "@4x.png" }}
                   className="text-white w-[200px] h-[200px]"
                   resizeMode="contain"
                 />
