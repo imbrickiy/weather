@@ -33,7 +33,7 @@ function useFetch(
         setError(err.message);
         setLoading(false);
       });
-  }, [url]);
+  }, [url, options]);
   return { data, loading, error };
 }
 
